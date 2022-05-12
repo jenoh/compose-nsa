@@ -1,0 +1,50 @@
+version: "4"
+services:
+  traefik:
+    image: traefik:1.7
+    restart: always
+    command:
+      - "--web"
+      - "--docker"
+      - "--docker.domain=default-group0-web.francecentral.cloudapp.azure.com"
+      - "--metrics.prometheus=true"
+    depends_on:
+    - "result"
+    - "vote"
+    ports:
+    - "80:80"
+    - "8080:8080"
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /dev/null:/traefik.toml
+    networks:
+      - front-tier
+      - back-tier
+
+  vote:
+    image: "default-admin.francecentral.cloudapp.azure.com:5000/vote:latest"
+    restart: always
+    ports:
+      - "5000:80"
+    networks:
+      - front-tier
+      - back-tier
+    command:
+      - /entrypoint.sh
+      - "python app.py"
+      - "default-group9-database.francecentral.cloudapp.azure.com"
+    environment:
+      - PREFIX=/vote
+    labels:
+    - "traefik.frontend.rule=Host:default-group9-web.francecentral.cloudapp.azure.com;PathPrefix:/vote,/static,/dotnet"
+    - "traefik.port=80"
+
+  result:
+    image: "default-admin.francecentral.cloudapp.azure.com:5000/result:latest"
+    restart: always
+    ports:
+      - "5001:80"
+      - "5858:5858"
+    networks:
+      - front-tier
+                                                                                                                                                                                          1,12          Top

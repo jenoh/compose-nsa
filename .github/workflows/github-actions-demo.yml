@@ -30,4 +30,4 @@ jobs:
       env:
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       run: |
-        ansible-playbook ansible/web.yaml -i ansible/inventory/azure/hosts --private-key ~/.ssh/group-9_rsa
+        ansible-playbook ansible/web.yaml -i ansible/inventory/azure/hosts --private-key .ssh/group-9_rsa

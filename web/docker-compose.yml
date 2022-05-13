@@ -1,4 +1,4 @@
-version: "4"
+version: "3"
 services:
   traefik:
     image: traefik:1.7
@@ -47,4 +47,25 @@ services:
       - "5858:5858"
     networks:
       - front-tier
-                                                                                                                                                                                          1,12          Top
+      - back-tier
+    command:
+      - /entrypoint.sh
+      - "nodemon server.js"
+      - "default-group9-database.francecentral.cloudapp.azure.com"
+    labels:
+    - "traefik.port=80"
+    - "traefik.frontend.rule=Host:default-group9-web.francecentral.cloudapp.azure.com"
+
+  worker:
+    image: "default-admin.francecentral.cloudapp.azure.com:5000/worker:latest"
+    restart: always
+    networks:
+      - back-tier
+    entrypoint: /entrypoint.sh
+    command:
+      - "dotnet Worker.dll"
+      - "default-group9-database.francecentral.cloudapp.azure.com"
+
+networks:
+  front-tier:
+  back-tier:

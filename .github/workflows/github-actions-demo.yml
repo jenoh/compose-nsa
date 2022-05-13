@@ -24,9 +24,7 @@ jobs:
       run: |
         
         mkdir .ssh
-        echo "$PRIVATE_KEY" > .ssh/group-9_rsa
-        echo $PRIVATE_KEY
-        cat .ssh/group-9_rsa 
+        echo $PRIVATE_KEY > .ssh/group-9_rsa
         chmod 600 .ssh/group-9_rsa
     - name: run exporters playbook
       env:

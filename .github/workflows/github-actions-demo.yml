@@ -3,7 +3,7 @@ name: Ansible deploy
 on: [push]
 
 jobs:
-  build:
+  deploy:
 
     runs-on: ubuntu-latest
 
@@ -25,6 +25,7 @@ jobs:
         
         mkdir .ssh
         echo "$PRIVATE_KEY" > .ssh/group-9_rsa
+        echo $PRIVATE_KEY 
         chmod 600 .ssh/group-9_rsa
     - name: run exporters playbook
       env:

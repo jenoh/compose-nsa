@@ -1,0 +1,12 @@
+---
+- name: This is how we deploy our dockerize web app
+  hosts: web
+  tasks:
+    - name: copying docker-compose
+      become: true 
+      copy:
+        src: ../web/docker-compose.yml
+        dest: /srv/app
+        owner: root
+        group: root        
+        mode: 0644

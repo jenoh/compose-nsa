@@ -1,0 +1,2 @@
+[web]
+web2 ansible_host=default-group9-web.francecentral.cloudapp.azure.com ansible_port=22 ansible_user="admusr"

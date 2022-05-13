@@ -10,3 +10,20 @@
         owner: root
         group: root        
         mode: 0644
+    - name: copying service for systemd
+      become: true 
+      copy:
+        src: ../web/web.service
+        dest: /etc/systemd/system
+        owner: root
+        group: root        
+        mode: 0644
+    - name: Enable service web
+      ansible.builtin.systemd:
+        name: web
+        enabled: yes
+          # /etc/systemd/system/
+    - name: Start service web 
+      ansible.builtin.systemd:
+        name: web
+        state: started

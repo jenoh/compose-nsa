@@ -6,7 +6,8 @@ jobs:
   deploy:
 
     runs-on: ubuntu-latest
-
+    vars:
+        ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
     steps:
     - uses: actions/checkout@v1
     - name: Set up Python 3.7
@@ -26,10 +27,11 @@ jobs:
         mkdir .ssh
         echo $PRIVATE_KEY > .ssh/group-9_rsa
         chmod 600 .ssh/group-9_rsa
-    - name: Install SSH key
-      uses: webfactory/ssh-agent@v0.5.0
+    - name: Install ssh key
+      uses: shimataro/ssh-key-action@v2
       with:
-        ssh-private-key: ${{ secrets.PRIVATE_KEY }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        known_hosts: ${{ secrets.HOSTNAME_URL }}
     - name: run exporters playbook
       env:
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}

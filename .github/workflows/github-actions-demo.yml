@@ -26,11 +26,10 @@ jobs:
         mkdir .ssh
         echo $PRIVATE_KEY > .ssh/group-9_rsa
         chmod 600 .ssh/group-9_rsa
-    - name: Install ssh key
-      uses: shimataro/ssh-key-action@v2
+    - name: Install SSH key
+      uses: webfactory/ssh-agent@v0.5.0
       with:
-        key: ${{ secrets.PRIVATE_KEY }}
-        known_hosts: ${{ secrets.HOSTNAME_URL }}
+        ssh-private-key: ${{ secrets.PRIVATE_KEY }}
     - name: run exporters playbook
       env:
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}

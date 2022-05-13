@@ -18,12 +18,12 @@
         owner: root
         group: root        
         mode: 0644
-    - name: Enable service web
+    - name: just force systemd to reread configs
+      become: true
       ansible.builtin.systemd:
-        name: web
-        enabled: yes
-          # /etc/systemd/system/
-    - name: Start service web 
+        daemon_reload: yes
+    - name: start service web 
+      become: true 
       ansible.builtin.systemd:
         name: web
         state: started

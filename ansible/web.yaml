@@ -1,8 +1,6 @@
 ---
 - name: This is how we deploy our dockerize web app
   hosts: web
-  vars:
-    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
   tasks:
     - name: copying docker-compose
       become: true 

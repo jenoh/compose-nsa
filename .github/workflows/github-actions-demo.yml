@@ -6,8 +6,6 @@ jobs:
   deploy:
 
     runs-on: ubuntu-latest
-    vars:
-        ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
     steps:
     - uses: actions/checkout@v1
     - name: Set up Python 3.7

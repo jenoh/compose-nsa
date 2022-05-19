@@ -46,5 +46,5 @@
     - name: start service postgresql
       become: true 
       ansible.builtin.systemd:
-        name: postgresql
+        name: redis
         state: started

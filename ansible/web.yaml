@@ -10,7 +10,7 @@
         owner: root
         group: root        
         mode: 0644
-    - name: copying service for systemd
+    - name: copying service for systemd 
       become: true 
       copy:
         src: ../web/web.service

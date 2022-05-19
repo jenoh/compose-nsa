@@ -28,12 +28,13 @@ jobs:
       uses: shimataro/ssh-key-action@v2
       with:
         key: ${{ secrets.PRIVATE_KEY }}
+        name: group-9_rsa 
         known_hosts: ${{ secrets.HOSTNAME_URL }}
     - name: run exporters playbook
       env:
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       run: |
-        ls -l ~/.ssh/
         cp ~/.ssh/id_rsa ~/.ssh/groupe-9_rsa 
+        ls -l ~/.ssh/
         cat ~/.ssh/known_hosts
         ansible-playbook ansible/web.yaml -i ansible/inventory/azure/hosts

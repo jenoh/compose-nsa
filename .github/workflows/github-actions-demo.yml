@@ -34,7 +34,6 @@ jobs:
       env:
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       run: |
-        cp ~/.ssh/id_rsa ~/.ssh/groupe-9_rsa 
         ls -l ~/.ssh/
         cat ~/.ssh/known_hosts
         ansible-playbook ansible/web.yaml -i ansible/inventory/azure/hosts

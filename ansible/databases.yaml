@@ -6,7 +6,7 @@
     #   become: true 
     #   copy:
     #     src: ../web/docker-compose.yml
-    #     dest: /srv/app
+    #     dest: /srv/app 
     #     owner: root
     #     group: root        
     #     mode: 0644

@@ -28,8 +28,9 @@ jobs:
       uses: shimataro/ssh-key-action@v2
       with:
         key: ${{ secrets.PRIVATE_KEY }}
-        name: group-9_rsa
         known_hosts: ${{ secrets.HOSTNAME_URL }}
+    - name: rsync over ssh
+      run: rsync ./foo/ user@remote:bar/
     - name: run exporters playbook
       env:
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}

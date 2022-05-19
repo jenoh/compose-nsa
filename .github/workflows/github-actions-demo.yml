@@ -29,8 +29,6 @@ jobs:
       with:
         key: ${{ secrets.PRIVATE_KEY }}
         known_hosts: ${{ secrets.HOSTNAME_URL }}
-    - name: rsync over ssh
-      run: rsync ./foo/ user@remote:bar/
     - name: run exporters playbook
       env:
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}

@@ -34,8 +34,6 @@ jobs:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         run: |
           ansible-playbook ansible/web.yaml -i ansible/inventory/azure/hosts
-          ansible-playbook ansible/databases.yaml -i ansible/inventory/azure/hosts
-
 
   deploy-databases:
     runs-on: ubuntu-latest

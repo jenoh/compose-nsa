@@ -2,39 +2,38 @@ name: Ansible deploy
 
 on: [push]
 
-jobs:
-deploy-web:
-
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install ansible==2.9.2 requests
-    - name: set ansible config secrets
-      env:
-        # ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-        DO_SSH_KEY: ${{ secrets.PRIVATE_KEY }}
-      run: |
-        mkdir .ssh
-        echo "$PRIVATE_KEY" > .ssh/group-9_rsa
-        chmod 600 .ssh/group-9_rsa
-    - name: Install ssh key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.PRIVATE_KEY }}
-        name: group-9_rsa 
-        known_hosts: ${{ secrets.HOSTNAME_URL }}
-    - name: run exporters playbook
-      env:
-        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-      run: |
-        ansible-playbook ansible/web.yaml -i ansible/inventory/azure/hosts
+jobs: 
+  deploy-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible==2.9.2 requests
+      - name: set ansible config secrets
+        env:
+          # ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          DO_SSH_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: |
+          mkdir .ssh
+          echo "$PRIVATE_KEY" > .ssh/group-9_rsa
+          chmod 600 .ssh/group-9_rsa
+      - name: Install ssh key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.PRIVATE_KEY }}
+          name: group-9_rsa 
+          known_hosts: ${{ secrets.HOSTNAME_URL }}
+      - name: run exporters playbook
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: |
+          ansible-playbook ansible/web.yaml -i ansible/inventory/azure/hosts
 
   deploy-databases:
     runs-on: ubuntu-latest

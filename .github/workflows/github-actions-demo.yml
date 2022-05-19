@@ -22,8 +22,8 @@ jobs:
         DO_SSH_KEY: ${{ secrets.PRIVATE_KEY }}
       run: |
         mkdir .ssh
-        echo "$PRIVATE_KEY" > .ssh/group-9_rsa
-        chmod 600 .ssh/group-9_rsa
+        echo "$PRIVATE_KEY" > ~/.ssh/group-9_rsa
+        chmod 600 ~/.ssh/group-9_rsa
     - name: Install ssh key
       uses: shimataro/ssh-key-action@v2
       with:

@@ -18,7 +18,7 @@ jobs:
       - name: set ansible config secrets
         env:
           # ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          DO_SSH_KEY: ${{ secrets.PRIVATE_KEY }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         run: |
           mkdir .ssh
           echo "$PRIVATE_KEY" > .ssh/group-9_rsa
@@ -50,7 +50,7 @@ jobs:
     - name: set ansible config secrets
       env:
         # ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-        DO_SSH_KEY: ${{ secrets.PRIVATE_KEY }}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       run: |
         mkdir .ssh
         echo "$PRIVATE_KEY" > .ssh/group-9_rsa
@@ -65,4 +65,5 @@ jobs:
       env:
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       run: |
+        ls -la ~/.ssh/
         ansible-playbook ansible/databases.yaml -i ansible/inventory/azure/hosts

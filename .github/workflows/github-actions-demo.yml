@@ -16,15 +16,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install ansible==2.9.2 requests
-    # - name: set ansible config secrets
-    #   env:
-    #     # ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-    #     PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-    #   run: |
-        
-    #     mkdir .ssh
-    #     echo "$PRIVATE_KEY" > .ssh/group-9_rsa
-    #     chmod 600 .ssh/group-9_rsa
     - name: Install ssh key
       uses: shimataro/ssh-key-action@v2
       with:

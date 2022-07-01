@@ -1,0 +1,35 @@
+{
+    "meta": {
+      "version": "1",
+      "type": "variable",
+      "name": "host-Template",
+      "description": "template created from variable: host"
+    },
+    "content": {
+      "data": {
+        "type": "variable",
+        "id": "0990380a40ad7000",
+        "attributes": {
+          "name": "host",
+          "arguments": {
+            "type": "query",
+            "values": {
+              "query": "import \"influxdata/influxdb/v1\"\n\nv1.tagValues(bucket: \"data\", tag: \"host\")\n    |> yield(name: \"value\")",
+              "language": "flux"
+            }
+          },
+          "selected": []
+        },
+        "relationships": {
+          "variable": {
+            "data": []
+          },
+          "label": {
+            "data": []
+          }
+        }
+      },
+      "included": []
+    },
+    "labels": []
+}

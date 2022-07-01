@@ -1,0 +1,35 @@
+{
+    "meta": {
+      "version": "1",
+      "type": "variable",
+      "name": "compose_service-Template",
+      "description": "template created from variable: compose_service"
+    },
+    "content": {
+      "data": {
+        "type": "variable",
+        "id": "0990476e60ed7000",
+        "attributes": {
+          "name": "compose_service",
+          "arguments": {
+            "type": "query",
+            "values": {
+              "query": "import \"influxdata/influxdb/v1\"\n\nv1.tagValues(bucket: \"data\", tag: \"com.docker.compose.service\")\n  |> unique(column: \"_value\")\n  |> yield(name: \"_value\")",
+              "language": "flux"
+            }
+          },
+          "selected": []
+        },
+        "relationships": {
+          "variable": {
+            "data": []
+          },
+          "label": {
+            "data": []
+          }
+        }
+      },
+      "included": []
+    },
+    "labels": []
+}

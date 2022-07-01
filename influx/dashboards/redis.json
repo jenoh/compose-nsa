@@ -1,0 +1,110 @@
+{
+    "meta": {
+      "version": "1",
+      "type": "dashboard",
+      "name": "redis-Template",
+      "description": "template created from dashboard: redis"
+    },
+    "content": {
+      "data": {
+        "type": "dashboard",
+        "attributes": {
+          "name": "redis",
+          "description": ""
+        },
+        "relationships": {
+          "label": {
+            "data": []
+          },
+          "cell": {
+            "data": [
+              {
+                "type": "cell",
+                "id": "099043e7e8c2e000"
+              }
+            ]
+          },
+          "variable": {
+            "data": []
+          }
+        }
+      },
+      "included": [
+        {
+          "id": "099043e7e8c2e000",
+          "type": "cell",
+          "attributes": {
+            "x": 0,
+            "y": 0,
+            "w": 3,
+            "h": 2
+          },
+          "relationships": {
+            "view": {
+              "data": {
+                "type": "view",
+                "id": "099043e7e8c2e000"
+              }
+            }
+          }
+        },
+        {
+          "type": "view",
+          "id": "099043e7e8c2e000",
+          "attributes": {
+            "name": "uptime",
+            "properties": {
+              "shape": "chronograf-v2",
+              "type": "single-stat",
+              "queries": [
+                {
+                  "text": "from(bucket: \"data\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"redis\")\n  |> filter(fn: (r) => r[\"_field\"] == \"uptime\")\n    |> last()\n    |> map(fn: (r) => ({r with _value: r._value / 3600}))\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+                  "editMode": "advanced",
+                  "name": "",
+                  "builderConfig": {
+                    "buckets": [],
+                    "tags": [
+                      {
+                        "key": "_measurement",
+                        "values": [],
+                        "aggregateFunctionType": "filter"
+                      }
+                    ],
+                    "functions": [
+                      {
+                        "name": "mean"
+                      }
+                    ],
+                    "aggregateWindow": {
+                      "period": "auto",
+                      "fillValues": false
+                    }
+                  }
+                }
+              ],
+              "prefix": "",
+              "tickPrefix": "",
+              "suffix": " hours",
+              "tickSuffix": "",
+              "colors": [
+                {
+                  "id": "base",
+                  "type": "text",
+                  "hex": "#00C9FF",
+                  "name": "laser",
+                  "value": 0
+                }
+              ],
+              "decimalPlaces": {
+                "isEnforced": true,
+                "digits": 0
+              },
+              "note": "",
+              "showNoteWhenEmpty": false
+            }
+          }
+        }
+      ]
+    },
+    "labels": []
+}

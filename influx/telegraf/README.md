@@ -1,0 +1,1 @@
+Dans ce dossier se trouvent les configurations telegraf à utiliser.

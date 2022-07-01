@@ -1,0 +1,1 @@
+Dans ce dossier se trouvent les variables utilisées par les dashboards au format JSON. Ces fichiers sont aisément importables dans l'interface web influx.

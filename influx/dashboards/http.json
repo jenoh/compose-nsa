@@ -1,0 +1,555 @@
+{
+    "meta": {
+      "version": "1",
+      "type": "dashboard",
+      "name": "http-Template",
+      "description": "template created from dashboard: http"
+    },
+    "content": {
+      "data": {
+        "type": "dashboard",
+        "attributes": {
+          "name": "http",
+          "description": ""
+        },
+        "relationships": {
+          "label": {
+            "data": []
+          },
+          "cell": {
+            "data": [
+              {
+                "type": "cell",
+                "id": "098746d090c2a000"
+              },
+              {
+                "type": "cell",
+                "id": "098747e75bc2a000"
+              },
+              {
+                "type": "cell",
+                "id": "0987482e86c2a000"
+              },
+              {
+                "type": "cell",
+                "id": "098876681cf3b000"
+              },
+              {
+                "type": "cell",
+                "id": "0988770e1f73b000"
+              }
+            ]
+          },
+          "variable": {
+            "data": []
+          }
+        }
+      },
+      "included": [
+        {
+          "id": "098746d090c2a000",
+          "type": "cell",
+          "attributes": {
+            "x": 0,
+            "y": 4,
+            "w": 4,
+            "h": 3
+          },
+          "relationships": {
+            "view": {
+              "data": {
+                "type": "view",
+                "id": "098746d090c2a000"
+              }
+            }
+          }
+        },
+        {
+          "id": "098747e75bc2a000",
+          "type": "cell",
+          "attributes": {
+            "x": 8,
+            "y": 4,
+            "w": 4,
+            "h": 3
+          },
+          "relationships": {
+            "view": {
+              "data": {
+                "type": "view",
+                "id": "098747e75bc2a000"
+              }
+            }
+          }
+        },
+        {
+          "id": "0987482e86c2a000",
+          "type": "cell",
+          "attributes": {
+            "x": 4,
+            "y": 0,
+            "w": 4,
+            "h": 4
+          },
+          "relationships": {
+            "view": {
+              "data": {
+                "type": "view",
+                "id": "0987482e86c2a000"
+              }
+            }
+          }
+        },
+        {
+          "id": "098876681cf3b000",
+          "type": "cell",
+          "attributes": {
+            "x": 8,
+            "y": 0,
+            "w": 4,
+            "h": 4
+          },
+          "relationships": {
+            "view": {
+              "data": {
+                "type": "view",
+                "id": "098876681cf3b000"
+              }
+            }
+          }
+        },
+        {
+          "id": "0988770e1f73b000",
+          "type": "cell",
+          "attributes": {
+            "x": 0,
+            "y": 0,
+            "w": 4,
+            "h": 4
+          },
+          "relationships": {
+            "view": {
+              "data": {
+                "type": "view",
+                "id": "0988770e1f73b000"
+              }
+            }
+          }
+        },
+        {
+          "type": "view",
+          "id": "098746d090c2a000",
+          "attributes": {
+            "name": "/vote - last response",
+            "properties": {
+              "shape": "chronograf-v2",
+              "type": "single-stat",
+              "queries": [
+                {
+                  "text": "from(bucket: \"data\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http_response\")\n  |> filter(fn: (r) => r[\"_field\"] == \"result_type\")\n  |> filter(fn: (r) => r[\"server\"] == \"http://default-group9-web.francecentral.cloudapp.azure.com/vote\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+                  "editMode": "advanced",
+                  "name": "",
+                  "builderConfig": {
+                    "buckets": [],
+                    "tags": [
+                      {
+                        "key": "_measurement",
+                        "values": [],
+                        "aggregateFunctionType": "filter"
+                      }
+                    ],
+                    "functions": [
+                      {
+                        "name": "mean"
+                      }
+                    ],
+                    "aggregateWindow": {
+                      "period": "auto",
+                      "fillValues": false
+                    }
+                  }
+                }
+              ],
+              "prefix": "",
+              "tickPrefix": "",
+              "suffix": "",
+              "tickSuffix": "",
+              "colors": [
+                {
+                  "id": "base",
+                  "type": "text",
+                  "hex": "#00C9FF",
+                  "name": "laser",
+                  "value": 0
+                }
+              ],
+              "decimalPlaces": {
+                "isEnforced": true,
+                "digits": 0
+              },
+              "note": "",
+              "showNoteWhenEmpty": false
+            }
+          }
+        },
+        {
+          "type": "view",
+          "id": "098747e75bc2a000",
+          "attributes": {
+            "name": "/result - last response",
+            "properties": {
+              "shape": "chronograf-v2",
+              "type": "single-stat",
+              "queries": [
+                {
+                  "text": "from(bucket: \"data\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http_response\")\n  |> filter(fn: (r) => r[\"_field\"] == \"result_type\")\n  |> filter(fn: (r) => r[\"server\"] == \"http://default-group9-web.francecentral.cloudapp.azure.com/\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+                  "editMode": "advanced",
+                  "name": "",
+                  "builderConfig": {
+                    "buckets": [],
+                    "tags": [
+                      {
+                        "key": "_measurement",
+                        "values": [],
+                        "aggregateFunctionType": "filter"
+                      }
+                    ],
+                    "functions": [
+                      {
+                        "name": "mean"
+                      }
+                    ],
+                    "aggregateWindow": {
+                      "period": "auto",
+                      "fillValues": false
+                    }
+                  }
+                }
+              ],
+              "prefix": "",
+              "tickPrefix": "",
+              "suffix": "",
+              "tickSuffix": "",
+              "colors": [
+                {
+                  "id": "base",
+                  "type": "text",
+                  "hex": "#00C9FF",
+                  "name": "laser",
+                  "value": 0
+                }
+              ],
+              "decimalPlaces": {
+                "isEnforced": true,
+                "digits": 2
+              },
+              "note": "",
+              "showNoteWhenEmpty": false
+            }
+          }
+        },
+        {
+          "type": "view",
+          "id": "0987482e86c2a000",
+          "attributes": {
+            "name": "Server mean response time",
+            "properties": {
+              "shape": "chronograf-v2",
+              "queries": [
+                {
+                  "text": "from(bucket: \"data\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http_response\")\n  |> filter(fn: (r) => r[\"_field\"] == \"response_time\")\n  |> filter(fn: (r) => r[\"host\"] == \"default-Group9-Web\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+                  "editMode": "advanced",
+                  "name": "",
+                  "builderConfig": {
+                    "buckets": [],
+                    "tags": [
+                      {
+                        "key": "_measurement",
+                        "values": [],
+                        "aggregateFunctionType": "filter"
+                      }
+                    ],
+                    "functions": [
+                      {
+                        "name": "mean"
+                      }
+                    ],
+                    "aggregateWindow": {
+                      "period": "auto",
+                      "fillValues": false
+                    }
+                  }
+                }
+              ],
+              "axes": {
+                "x": {
+                  "bounds": [
+                    "",
+                    ""
+                  ],
+                  "label": "",
+                  "prefix": "",
+                  "suffix": "",
+                  "base": "10",
+                  "scale": "linear"
+                },
+                "y": {
+                  "bounds": [
+                    "",
+                    ""
+                  ],
+                  "label": "response_time",
+                  "prefix": "",
+                  "suffix": "s",
+                  "base": "2",
+                  "scale": "linear"
+                }
+              },
+              "type": "line-plus-single-stat",
+              "staticLegend": {
+                "colorizeRows": true,
+                "heightRatio": 0.20098039215686275,
+                "show": true,
+                "opacity": 1,
+                "orientationThreshold": 100000000,
+                "widthRatio": 1
+              },
+              "colors": [
+                {
+                  "id": "base",
+                  "type": "text",
+                  "hex": "#00C9FF",
+                  "name": "laser",
+                  "value": 0
+                },
+                {
+                  "id": "faefa7f2-3253-4c63-9eec-dcbf8e8b82fd",
+                  "type": "text",
+                  "hex": "#DC4E58",
+                  "name": "fire",
+                  "value": 0.5
+                }
+              ],
+              "prefix": "",
+              "suffix": "s",
+              "decimalPlaces": {
+                "isEnforced": true,
+                "digits": 3
+              },
+              "note": "",
+              "showNoteWhenEmpty": false,
+              "xColumn": "_time",
+              "generateXAxisTicks": [],
+              "xTotalTicks": 0,
+              "xTickStart": 0,
+              "xTickStep": 0,
+              "yColumn": "_value",
+              "generateYAxisTicks": [],
+              "yTotalTicks": 0,
+              "yTickStart": 0,
+              "yTickStep": 0,
+              "shadeBelow": false,
+              "position": "overlaid",
+              "timeFormat": "",
+              "hoverDimension": "auto",
+              "legendColorizeRows": true,
+              "legendHide": false,
+              "legendOpacity": 1,
+              "legendOrientationThreshold": 100000000
+            }
+          }
+        },
+        {
+          "type": "view",
+          "id": "098876681cf3b000",
+          "attributes": {
+            "name": "/result result_code",
+            "properties": {
+              "shape": "chronograf-v2",
+              "type": "scatter",
+              "queries": [
+                {
+                  "text": "from(bucket: \"data\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"server\"] == \"http://default-group9-web.francecentral.cloudapp.azure.com/\")\n  |> filter(fn: (r) => r[\"_field\"] == \"result_code\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+                  "editMode": "advanced",
+                  "name": "",
+                  "builderConfig": {
+                    "buckets": [],
+                    "tags": [
+                      {
+                        "key": "_measurement",
+                        "values": [],
+                        "aggregateFunctionType": "filter"
+                      }
+                    ],
+                    "functions": [
+                      {
+                        "name": "mean"
+                      }
+                    ],
+                    "aggregateWindow": {
+                      "period": "auto",
+                      "fillValues": false
+                    }
+                  }
+                }
+              ],
+              "colors": [
+                "#31C0F6",
+                "#BC00B8",
+                "#FF7E27"
+              ],
+              "fillColumns": [
+                "result",
+                "_start",
+                "_stop",
+                "_field",
+                "_measurement",
+                "host",
+                "method",
+                "server",
+                "status_code"
+              ],
+              "symbolColumns": [
+                "result",
+                "_start",
+                "_stop",
+                "_field",
+                "_measurement",
+                "host",
+                "method",
+                "server",
+                "status_code"
+              ],
+              "xColumn": "_time",
+              "generateXAxisTicks": [],
+              "xTotalTicks": 0,
+              "xTickStart": 0,
+              "xTickStep": 0,
+              "yColumn": "_value",
+              "generateYAxisTicks": [
+                "yTotalTicks",
+                "yTickStart",
+                "yTickStep"
+              ],
+              "yTotalTicks": 7,
+              "yTickStart": 0,
+              "yTickStep": 1,
+              "yDomain": [
+                0,
+                6
+              ],
+              "xAxisLabel": "",
+              "yAxisLabel": "status_code",
+              "xPrefix": "",
+              "xSuffix": "",
+              "yPrefix": "",
+              "ySuffix": "",
+              "note": "",
+              "showNoteWhenEmpty": false,
+              "timeFormat": "",
+              "legendColorizeRows": true,
+              "legendHide": false,
+              "legendOpacity": 1,
+              "legendOrientationThreshold": 100000000
+            }
+          }
+        },
+        {
+          "type": "view",
+          "id": "0988770e1f73b000",
+          "attributes": {
+            "name": "/vote result_code",
+            "properties": {
+              "shape": "chronograf-v2",
+              "type": "scatter",
+              "queries": [
+                {
+                  "text": "from(bucket: \"data\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"http_response\")\n  |> filter(fn: (r) => r[\"server\"] == \"http://default-group9-web.francecentral.cloudapp.azure.com/vote\")\n  |> filter(fn: (r) => r[\"_field\"] == \"result_code\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+                  "editMode": "advanced",
+                  "name": "",
+                  "builderConfig": {
+                    "buckets": [],
+                    "tags": [
+                      {
+                        "key": "_measurement",
+                        "values": [],
+                        "aggregateFunctionType": "filter"
+                      }
+                    ],
+                    "functions": [
+                      {
+                        "name": "mean"
+                      }
+                    ],
+                    "aggregateWindow": {
+                      "period": "auto",
+                      "fillValues": false
+                    }
+                  }
+                }
+              ],
+              "colors": [
+                "#31C0F6",
+                "#BC00B8",
+                "#FF7E27"
+              ],
+              "fillColumns": [
+                "result",
+                "_start",
+                "_stop",
+                "_field",
+                "_measurement",
+                "host",
+                "method",
+                "server",
+                "status_code"
+              ],
+              "symbolColumns": [
+                "result",
+                "_start",
+                "_stop",
+                "_field",
+                "_measurement",
+                "host",
+                "method",
+                "server",
+                "status_code"
+              ],
+              "xColumn": "_time",
+              "generateXAxisTicks": [],
+              "xTotalTicks": 0,
+              "xTickStart": 0,
+              "xTickStep": 0,
+              "yColumn": "_value",
+              "generateYAxisTicks": [
+                "yTickStart",
+                "yTickStep",
+                "yTotalTicks"
+              ],
+              "yTotalTicks": 7,
+              "yTickStart": 0,
+              "yTickStep": 1,
+              "yDomain": [
+                0,
+                6
+              ],
+              "xAxisLabel": "",
+              "yAxisLabel": "status_code",
+              "xPrefix": "",
+              "xSuffix": "",
+              "yPrefix": "",
+              "ySuffix": "",
+              "note": "",
+              "showNoteWhenEmpty": false,
+              "timeFormat": "",
+              "legendColorizeRows": true,
+              "legendHide": false,
+              "legendOpacity": 1,
+              "legendOrientationThreshold": 100000000
+            }
+          }
+        }
+      ]
+    },
+    "labels": []
+}

@@ -1,0 +1,1 @@
+Dans ce dossier se trouvent les dashboards au format JSON. Ces fichiers sont aisément importables dans l'interface web influx.

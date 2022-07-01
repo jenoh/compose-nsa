@@ -1,0 +1,36 @@
+---
+- name: This is how we deploy our dockerize web app
+  hosts: default-Group9-Web
+  tasks:
+    - name: docker service
+      become: true
+      ansible.builtin.systemd:
+        daemon_reload: yes
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Synchronize applications folder
+      become: true 
+      ansible.posix.synchronize:
+        src: ../applications
+        dest: /srv/app
+        rsync_opts:
+          - "--exclude=applications.service"
+
+    - name: copying applications systemd service
+      become: true 
+      copy:
+        src: ../applications/applications.service
+        dest: /etc/systemd/system
+        owner: root
+        group: root        
+        mode: 0644
+
+    - name: applications service
+      become: true
+      ansible.builtin.systemd:
+        daemon_reload: yes
+        name: applications
+        state: started
+        enabled: true

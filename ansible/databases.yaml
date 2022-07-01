@@ -2,49 +2,18 @@
 - name: This is how we deploy our databases
   hosts: databases
   tasks:
-    # - name: copying docker-compose
-    #   become: true 
-    #   copy:
-    #     src: ../web/docker-compose.yml
-    #     dest: /srv/app 
-    #     owner: root
-    #     group: root        
-    #     mode: 0644
-    - name: copying redis service for systemd
-      become: true 
-      copy:
-        src: ../databases/redis.service
-        dest: /etc/systemd/system
-        owner: root
-        group: root        
-        mode: 0644
-    - name: copying redis conf for systemd
-      become: true 
-      copy:
-        src: ../databases/redis.conf
-        dest: /etc/systemd/system
-        owner: root
-        group: root        
-        mode: 0644
-    - name: copying postgresql service for systemd
-      become: true 
-      copy:
-        src: ../databases/postgresql.service
-        dest: /lib/systemd/system
-        owner: root
-        group: root        
-        mode: 0644 
-    - name: just force systemd to reread configs
+    - name: redis-server service
       become: true
       ansible.builtin.systemd:
         daemon_reload: yes
-    - name: start service redis
-      become: true 
-      ansible.builtin.systemd:
-        name: redis
+        name: redis-server
         state: started
-    - name: start service postgresql
-      become: true 
+        enabled: true
+
+    - name: postgresql service
+      become: true
       ansible.builtin.systemd:
-        name: redis
+        daemon_reload: yes
+        name: postgresql
         state: started
+        enabled: true

@@ -1,4 +1,4 @@
-[web]
-web-host ansible_host=default-group9-web.francecentral.cloudapp.azure.com ansible_port=22 ansible_user="admusr" ansible_ssh_private_key_file=~/.ssh/group-9_rsa
+[applications]
+default-Group9-Web ansible_host=default-group9-web.francecentral.cloudapp.azure.com ansible_port=22 ansible_user="admusr" ansible_ssh_private_key_file=~/.ssh/group-9_rsa
 [databases]
 databases-host ansible_host=default-group9-database.francecentral.cloudapp.azure.com ansible_port=22 ansible_user="admusr" ansible_ssh_private_key_file=~/.ssh/group-9_rsa 

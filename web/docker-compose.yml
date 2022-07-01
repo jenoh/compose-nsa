@@ -6,7 +6,7 @@ services:
     command:
       - "--web"
       - "--docker"
-      - "--docker.domain=default-group0-web.francecentral.cloudapp.azure.com"
+      - "--docker.domain=default-group9-web.francecentral.cloudapp.azure.com"
       - "--metrics.prometheus=true"
     depends_on:
     - "result"
